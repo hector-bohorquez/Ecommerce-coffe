@@ -17,16 +17,15 @@ export default function Page() {
   );
 
   const buyStripe = async () => {
-    removeAll();
     try {
-      const stripe = await stripePromise;
       const res = await makePaymentRequest.post("/api/orders", {
         products: items,
       });
-      await stripe?.redirectToCheckout({
-        sessionId: res.data.stripeSession.id,
-      });
-      removeAll();
+      // Redirect to Stripe checkout session
+      if (res.data?.stripeSession?.url) {
+        window.location.href = res.data.stripeSession.url;
+        removeAll();
+      }
     } catch (error) {
       console.log(error);
     }

@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
+    <html lang="en" className={cn("font-sans", geist.variable)} suppressHydrationWarning>
       <body className={urbanist.className}>
         <ThemeProvider
           attribute="class"
